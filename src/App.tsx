@@ -13,10 +13,10 @@ function App() {
     <div className="flex flex-col h-screen">
       <Navbar />
       <div className="flex-grow flex lg:relative">
-        <div className="lg:absolute h-full sm:block hidden">
+        <div className="xl:absolute h-full sm:block hidden">
           <Sidebar />
         </div>
-        <div className="flex justify-center w-full mt-5">
+        <div className="flex justify-center w-full pt-4 sm:pt-5">
           <Routes>
             <Route path='/' element={<Home />}/>
             <Route path="/create" element={<CreateContact />} />

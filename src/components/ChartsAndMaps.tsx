@@ -147,11 +147,11 @@ const ChartsAndMaps = () => {
 
   return (
     <div className='flex flex-col w-full md:w-3/4 m-2 gap-5'>
-      <div className='w-full text-center text-3xl font-bold'>Covid Dashboard</div>
+      <div className='w-full text-center md:text-3xl text-xl font-bold'>Covid Dashboard</div>
       {allData ? 
         <div className='w-full flex justify-center lg:h-96 h-48 sm:gap-2'>
           <div className='sm:w-1/3 w-1/2 border-2 sm:p-2 flex flex-col'>
-            <div className='text-center text-lg font-semibold underline'>All Time Data</div>
+            <div className='text-center md:text-lg font-semibold underline'>All Time Data</div>
             <div className='flex justify-center h-4/5'>
               <Pie
                 data={pieData}>
@@ -159,7 +159,7 @@ const ChartsAndMaps = () => {
             </div>
           </div>
           <div className='sm:w-1/3 w-1/2 border-2 sm:p-2 flex flex-col'>
-            <div className='text-center text-lg font-semibold underline'>Today's Data</div>
+            <div className='text-center md:text-lg font-semibold underline'>Today's Data</div>
             <div className='flex justify-center h-4/5'>
               <Pie
                 data={pieDataToday}>
@@ -169,6 +169,7 @@ const ChartsAndMaps = () => {
         </div> :
         <div className='flex w-full justify-center mb-5 font-semibold text-lg'>Loading...</div>
       }
+      <hr className='w-5/6 mx-auto border-gray-600'></hr>
       {chartData ? 
         <div className='border-2'>
           <Line 
@@ -178,15 +179,16 @@ const ChartsAndMaps = () => {
         </div> :
         <div className='flex w-full justify-center mb-5 font-semibold text-lg'>Loading...</div>}
       <div className='flex justify-center gap-2'>
-        <button className='text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900' 
+        <button className='text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-3 py-1.5 md:px-5 md:py-2.5 text-center dark:focus:ring-yellow-900' 
           onClick={() => navigate('/charts/cases')}>Cases</button>
-        <button className='text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900' 
+        <button className='text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-3 py-1.5 md:px-5 md:py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900' 
           onClick={() => navigate('/charts/deaths')}>Deaths</button>
-        <button className='text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800' 
+        <button className='text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-3 py-1.5 md:px-5 md:py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800' 
           onClick={() => navigate('/charts/recovered')}>Recovered</button>
       </div>
+      <hr className='w-5/6 mx-auto border-gray-600'></hr>
       <div>
-      <MapContainer center={[51.505, -0.09]} zoom={3} scrollWheelZoom={true}>
+      <MapContainer center={[20.5937, 78.9629]} zoom={3} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
