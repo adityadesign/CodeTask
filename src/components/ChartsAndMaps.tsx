@@ -7,9 +7,10 @@ import {Chart as ChartJS,
   Legend,
   Tooltip} from 'chart.js'
 import { Line, Pie } from 'react-chartjs-2'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+
 
 ChartJS.register(
   LineElement,
@@ -35,18 +36,21 @@ interface CountryData {
   recovered: number
 }
 
+interface AllData {
+  cases: number,
+  deaths: number,
+  recovered: number,
+  todayCases: number,
+  todayDeaths: number,
+  todayRecovered: number
+}
+
 const ChartsAndMaps = () => {
   const [chartData, setChartData] = useState<object>()
-  const [allData, setAllData] = useState<object>()
+  const [allData, setAllData] = useState<AllData>()
   const [countryData, setCountryData] = useState<CountryData[]>()
   const navigate = useNavigate()
   const {condition} = useParams()
-  const cases = useRef<Number>(0)
-  const deaths = useRef<Number>(0)
-  const recovered = useRef<Number>(0)
-  const casesToday = useRef<Number>(0)
-  const deathsToday = useRef<Number>(0)
-  const recoveredToday = useRef<Number>(0)
   
   const data =  {
     labels: chartData && Object.keys(chartData),
@@ -102,36 +106,12 @@ const ChartsAndMaps = () => {
     }
   },[condition])
 
-  const pieData = {
-    labels: ['Cases', 'Deaths', 'Recovered'],
-    datasets: [{
-      label: 'All Time Data',
-      data: [cases.current, deaths.current, recovered.current],
-      backgroundColor: ['blue', 'red', 'lightgreen']
-    }]
-  }
-
-  const pieDataToday = {
-    labels: ['Cases', 'Deaths', 'Recovered'],
-    datasets: [{
-      label: `Today's Data`,
-      data: [casesToday.current, deathsToday.current, recoveredToday.current],
-      backgroundColor: ['blue', 'red', 'lightgreen']
-    }]
-  }
-
   useEffect(() => {
     const fetchData = async() => {
       await fetch('https://disease.sh/v3/covid-19/all')
         .then(res => res.json())
         .then(data => {
           setAllData(data)
-          cases.current = data.cases
-          deaths.current = data.deaths
-          recovered.current = data.recovered
-          casesToday.current = data.todayCases
-          deathsToday.current = data.todayDeaths
-          recoveredToday.current = data.todayRecovered
         })
     }
     const fetchCountryData = async() => {
@@ -144,6 +124,24 @@ const ChartsAndMaps = () => {
     fetchData()
     fetchCountryData()
   },[])
+
+  const pieData = {
+    labels: ['Cases', 'Deaths', 'Recovered'],
+    datasets: [{
+      label: 'All Time Data',
+      data: [allData?.cases, allData?.deaths, allData?.recovered],
+      backgroundColor: ['blue', 'red', 'lightgreen']
+    }]
+  }
+
+  const pieDataToday = {
+    labels: ['Cases', 'Deaths', 'Recovered'],
+    datasets: [{
+      label: `Today's Data`,
+      data: [allData?.todayCases, allData?.todayDeaths, allData?.todayRecovered],
+      backgroundColor: ['blue', 'red', 'lightgreen']
+    }]
+  }
 
   return (
     <div className='flex flex-col w-full md:w-3/4 m-2 gap-5'>
