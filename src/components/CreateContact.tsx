@@ -8,7 +8,7 @@ interface FormData{
     id: string,
     firstName: string,
     lastName: string,
-    status: boolean
+    status: string
 }
 
 const CreateContact = () => {
@@ -18,7 +18,7 @@ const CreateContact = () => {
         id: '',
         firstName: '',
         lastName: '',
-        status: false
+        status: ''
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -5,7 +5,7 @@ export interface Contact{
   id: string,  
   firstName: string,
   lastName: string,
-  status: boolean
+  status: string
 }
 
 interface ContactState{

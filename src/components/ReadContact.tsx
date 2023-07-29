@@ -6,7 +6,7 @@ interface ReadData{
     id: string,
     firstName: string,
     lastName: string,
-    status: boolean
+    status: string
 }
 
 const ReadContact = () => {

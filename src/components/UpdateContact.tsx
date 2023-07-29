@@ -7,7 +7,7 @@ interface FormData{
     id: string,
     firstName: string,
     lastName: string,
-    status: boolean
+    status: string
 }
 
 const UpdateContact = () => {
@@ -20,7 +20,7 @@ const UpdateContact = () => {
         id: '',
         firstName: '',
         lastName: '',
-        status: false
+        status: ''
     })
 
     useEffect(() => {
@@ -74,6 +74,7 @@ const UpdateContact = () => {
                         name="status"
                         value='Active'
                         onChange={handleChange}
+                        checked={updateData.status === 'Active'}
                         required/>
                     <label htmlFor="active"> Active</label>
                 </div>
@@ -82,6 +83,7 @@ const UpdateContact = () => {
                         name="status"
                         value='Inactive'
                         onChange={handleChange}
+                        checked={updateData.status === 'Inactive'}
                         required/>
                     <label htmlFor="inactive"> Inactive</label>
                 </div>
